@@ -1,0 +1,6 @@
+GET http://localhost:3000/users/1234/
+
+
+// Limit and offset are query parameters
+// limit=10 → how many items to return.
+// offset=20 → how many items to skip first (for pagination).
