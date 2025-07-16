@@ -2,9 +2,15 @@ import { Controller, Delete, Get, Patch, Post, Put, Param, Query, Body, Headers,
 import { CreateUserDto } from './dtos/create-user.dto';
 import { GetUsersParamDto } from './dtos/get-users-param.dto';
 import { PatchUserDto } from './dtos/patch-user.dto';
+import { UsersService } from './providers/users.services';
 
 @Controller('users')
 export class UsersController {
+
+  constructor(
+    private readonly usersService: UsersService, // Injecting UsersService to use its methods
+  ) {}
+
   // Define the route for the users controller
   @Get("/:id?")
   public getUsers(
@@ -14,8 +20,7 @@ export class UsersController {
     // Use @Param to access route parameters like { id: '1231231', optional: 'hello', test: 'tawtraw' }
     // GET http://localhost:3000/users/1231231/hello/tawtraw
     // The required paramerts are id and test, while optional is not required
-    console.log(getUsersParamsDto, 'getUsersParamsDto');
-    return 'You sent a get request to users endpoint';
+    return this.usersService.findAll(getUsersParamsDto, limit, page);
   }
 
   @Post()
