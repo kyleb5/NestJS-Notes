@@ -1,6 +1,7 @@
 import { AppModule } from './app.module';
 import { NestFactory } from '@nestjs/core';
 import { ValidationPipe } from '@nestjs/common';
+import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -14,6 +15,22 @@ async function bootstrap() {
     forbidNonWhitelisted: true, // Throw an error if non-whitelisted properties are present
     transform: true, // Automatically transform payloads to DTO instances
   }));
+
+  // Swagger Configuration
+  const config = new DocumentBuilder().
+  setTitle('Hello World)').
+  setDescription('Use the base api url as').
+  setTermsOfService('http://google.com').
+  setLicense('MIT License TEST', '0214030').
+  addServer('http://localhost:3000').
+  setVersion('1.0').
+  build();
+  // Instantiate Document
+  const document = SwaggerModule.createDocument(app, config);
+  SwaggerModule.setup('api', app, document)
+
+
+
   await app.listen(3000);
 }
 bootstrap();
