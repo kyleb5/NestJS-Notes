@@ -11,3 +11,4 @@ import { AuthModule } from 'src/auth/auth.module';
   //  UsersService to make it available for injection in other modules
 })
 export class UsersModule {}
+// f
